@@ -1,0 +1,132 @@
+:root{
+  --bg:#182243;
+  --ring:#2c355f;
+  --paper:#ece7ff;
+  --card:#f3f0ff;
+  --ink:#1b2448;
+  --shadow:0 18px 40px rgba(10,12,28,.45);
+  --radius:18px;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  height:100%;
+  margin:0;
+  background: radial-gradient(1200px 1200px at 50% 20%, #1d2952 0%, #182243 35%, #131a35 100%);
+  color:#e9ecff;
+  font-family:"Albert Sans",sans-serif;
+}
+
+/* Achtergrondringen */
+.rings{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(closest-side, transparent 0 22%, rgba(17,25,56,.55) 23% 24%, transparent 25% 100%),
+    radial-gradient(closest-side, transparent 0 46%, rgba(17,25,56,.45) 47% 48%, transparent 49% 100%),
+    radial-gradient(closest-side, transparent 0 72%, rgba(17,25,56,.35) 73% 74%, transparent 75% 100%);
+  background-position:center 120px;
+  background-repeat:no-repeat;
+}
+
+/* Navigatie */
+.nav{
+  position:fixed;
+  top:18px; left:0; right:0;
+  display:flex; justify-content:center; gap:28px;
+  font-weight:600; font-size:15px;
+  z-index:10;
+}
+.nav a{
+  color:#dfe6ff; text-decoration:none; opacity:.85;
+}
+.nav a:hover{opacity:1}
+.nav a.active{
+  position:relative; opacity:1;
+}
+.nav a.active::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-6px;
+  height:2px; background:#dfe6ff; border-radius:2px;
+}
+
+/* Layout */
+.wrap{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  padding:110px 24px 140px;
+}
+
+/* Stack van 'papieren' */
+.stack{
+  position:relative;
+  width:min(780px, 92vw);
+  height:470px;
+}
+.sheet{
+  position:absolute; inset:0;
+  background:var(--paper);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  opacity:.95;
+}
+.sheet.s1{ transform:rotate(-13deg) translateY(28px) scale(.94); }
+.sheet.s2{ transform:rotate(-7deg)  translateY(16px) scale(.96); }
+.sheet.s3{ transform:rotate(-3deg)  translateY(6px)  scale(.98); }
+.sheet.s4{ transform:rotate(3deg)   translateY(10px) scale(.985);}
+.sheet.s5{ transform:rotate(9deg)   translateY(18px) scale(.965);}
+.sheet.s6{ transform:rotate(15deg)  translateY(30px) scale(.94); }
+
+/* Hoofdkaart */
+.card{
+  position:absolute; inset:0;
+  background:var(--card);
+  border-radius:20px;
+  box-shadow:var(--shadow), inset 0 0 0 1px rgba(0,0,0,.04);
+  display:flex; flex-direction:column;
+  padding:44px 56px 56px;
+  color:var(--ink);
+}
+.card h1{
+  font-size:42px;
+  margin:6px 0 16px;
+  font-weight:800;
+}
+.pill{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+.lead{
+  font-size:18px;
+  line-height:1.6;
+  max-width:640px;
+}
+.more{
+  margin-top:22px;
+  color:var(--ink);
+  text-decoration:none;
+  font-weight:600;
+}
+.more:hover{ text-decoration:underline; }
+
+/* Swipe */
+.swipe{
+  position:fixed;
+  bottom:24px; left:0; right:0;
+  text-align:center;
+  font-size:14px;
+  color:#dfe6ff;
+  opacity:.85;
+}
+.arrow{
+  font-size:24px;
+  animation:updown 1.6s infinite ease-in-out;
+}
+@keyframes updown{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
