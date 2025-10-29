@@ -361,3 +361,41 @@ body.lock{ overflow:hidden; }
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(48,224,255,0.25);
 }
+
+/* Social icon sectie rechtsonderin kaart */
+.socials {
+  position: absolute;
+  bottom: 22px;
+  right: 28px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.socials a {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  opacity: 0.85;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.socials a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.socials img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Donkerblauwe tint passend bij je palette */
+  filter: brightness(0) saturate(100%) invert(13%) sepia(28%) saturate(900%) hue-rotate(191deg) brightness(85%) contrast(94%);
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.socials a:hover img {
+  /* Iets lichtere blauw bij hover */
+  filter: brightness(0) saturate(100%) invert(28%) sepia(20%) saturate(950%) hue-rotate(186deg) brightness(95%) contrast(94%);
+  transform: translateY(-2px);
+}
