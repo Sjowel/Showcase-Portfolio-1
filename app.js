@@ -5,8 +5,10 @@
   let open = false;
   let animating = false;
   let touchStartY = 0;
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const OPEN_DURATION = prefersReduced ? 0 : 820;
+  const OPEN_DURATION  = prefersReduced ? 0 : 820;
+  const CLOSE_DURATION = prefersReduced ? 0 : 350;
 
   function ensureBackdrop(){
     let bd = document.querySelector('.backdrop');
@@ -38,10 +40,7 @@
     backdrop.addEventListener('click', closeSheet);
     document.addEventListener('keydown', onKey);
 
-    setTimeout(() => {
-      open = true;
-      animating = false;
-    }, OPEN_DURATION);
+    setTimeout(() => { open = true; animating = false; }, OPEN_DURATION);
   }
 
   function closeSheet(){
@@ -61,45 +60,66 @@
       document.removeEventListener('keydown', onKey);
       open = false;
       animating = false;
-    }, prefersReduced ? 0 : 350);
+    }, CLOSE_DURATION);
   }
 
-  function onKey(e){
-    if (e.key === 'Escape') closeSheet();
-  }
-
+  function onKey(e){ if (e.key === 'Escape') closeSheet(); }
   function atTop(){ return window.scrollY < 20; }
 
-  /* ---------------- Scroll en Swipe logica ---------------- */
+  // Optioneel: omlaag scrollen aan de top -> ga naar #projects (zelfde pagina)
+  function maybeScrollToProjects(){
+    const projects = document.getElementById('projects');
+    if (projects) projects.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
-  // Scroll met muis/trackpad
+  /* ---------------- Scroll / Swipe ---------------- */
+
+  // Muis/trackpad: niet meer openSheet() via scroll!
   window.addEventListener('wheel', (e) => {
-    // naar beneden = openen
-    if (e.deltaY > 8 && atTop()) openSheet();
-    // naar boven = sluiten (alleen als open)
-    if (e.deltaY < -8 && open) closeSheet();
+    if (open && e.deltaY < -8) { 
+      closeSheet();
+      return;
+    }
+    if (!open && e.deltaY > 8 && atTop()) {
+      // als je wilt dat omlaag scrolt naar projecten:
+      maybeScrollToProjects();
+    }
   }, { passive: true });
 
-  // Touch swipe op mobiel
+  // Touch: geen auto-open; wel sluiten bij swipe omlaag
   window.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
     const dy = touchStartY - e.touches[0].clientY;
-    // swipe omhoog (vinger omlaag) = open
-    if (dy > 18 && atTop()) openSheet();
-    // swipe omlaag (vinger omhoog) = sluit
-    if (dy < -18 && open) closeSheet();
+    if (open && dy < -18) { 
+      closeSheet();
+      return;
+    }
+    if (!open && dy > 18 && atTop()) {
+      // naar projects op dezelfde pagina (optioneel)
+      maybeScrollToProjects();
+    }
   }, { passive: true });
 
-  // Klik op "About me" in navigatie opent het blaadje ook
+  /* ---------------- Alleen via klik openen ---------------- */
+  // Nav "About me"
   document.querySelectorAll('nav a').forEach(a => {
-    if (a.getAttribute('href') === '#about' || /about/i.test(a.textContent || '')){
+    const href = a.getAttribute('href') || '';
+    if (href === '#about' || /about/i.test(a.textContent || '')){
       a.addEventListener('click', (ev) => {
         ev.preventDefault();
         openSheet();
       });
     }
+  });
+
+  // "Learn more about me" link/button
+  document.querySelectorAll('a.more, a[href="#about"]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      openSheet();
+    });
   });
 })();

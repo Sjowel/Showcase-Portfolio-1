@@ -80,6 +80,16 @@ html,body{
 .sheet.s5{ transform:rotate(9deg)   translateY(18px) scale(.965);}
 .sheet.s6{ transform:rotate(15deg)  translateY(30px) scale(.94); }
 
+.sheet-photo img {
+  height: 280px;
+  width: 100%;
+  object-fit: cover;
+  border: 4px solid #8dc5d1;
+  object-position: center top;
+  border-radius: 22px;
+  display: block;
+  background: rgba(141,197,209,.08);
+}
 /* Hoofdkaart */
 .card{
   position:absolute; inset:0;
@@ -216,3 +226,38 @@ body.lock{ overflow:hidden; }
   .sheet.s4.expand{ transition: none; transform: translate(-50%, -50%) scale(1); }
   .sheet-content{ transition: none; }
 }
+
+.projects-section {
+  min-height: 100vh;
+  padding: 100px 24px;
+  background: #141b38;
+  color: #e9ecff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects-section h2 {
+  font-size: 32px;
+  margin-bottom: 32px;
+  font-weight: 800;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  width: min(900px, 90%);
+}
+
+.project-card {
+  background: rgba(236, 231, 255, 0.1);
+  border-radius: 14px;
+  padding: 80px 20px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  transition: transform .25s ease;
+}
+.project-card:hover { transform: translateY(-4px); }
