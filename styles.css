@@ -143,17 +143,20 @@ html,body{
 }
 
 /* ---------------- Uitklapbare About-me kaart ---------------- */
-.sheet.s4.expand{
-  position: fixed;
-  left:50%; top:50%;
-  width:min(780px,92vw);
-  height:470px;
-  transform: translate(-50%, -50%) scale(1.6) rotate(0deg);
-  border-radius:28px;
+.sheet.s4.expand {
+  position: absolute;          
+  inset: 0;                   
+  transform-origin: center center;
+  transform: scale(1.35) rotate(0deg);
+  border-radius: 28px;
   background: var(--card);
   box-shadow: 0 28px 80px rgba(10,12,28,.55);
-  z-index:999;
-  transition: transform .8s cubic-bezier(.22,.8,.2,1), box-shadow .8s, border-radius .8s, background-color .8s;
+  z-index: 999;
+  transition:
+    transform 0.8s cubic-bezier(.22, .8, .2, 1),
+    box-shadow 0.8s,
+    border-radius 0.8s,
+    background-color 0.8s;
 }
 
 /* Donkere achtergrond */
@@ -312,7 +315,8 @@ body.lock{ overflow:hidden; }
   margin: 20px auto 10px auto;         
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
-  padding: 8px;                       
+  padding: 8px; 
+  z-index: 1;                      
 }
 
 .project-card h3 {
@@ -320,13 +324,15 @@ body.lock{ overflow:hidden; }
   font-weight: 600;
   margin: 6px 0 8px;
   color: #e9ecff;
+  z-index: 1;
 }
 
 .project-card p {
   font-size: 14px;
   line-height: 1.4;
   color: #cfd6ee;
-  flex-grow: 1;                        
+  flex-grow: 1;  
+  z-index: 1;                      
 }
 
 /* Knop onderaan de kaart */
