@@ -5,24 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Joëlle de Vlam — Portfolio</title>
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-
-  <!-- Externe CSS -->
   <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
 </head>
 
 <body>
+  <!-- Achtergrondringen -->
   <div class="rings"></div>
 
   <!-- Navigatie -->
   <nav class="nav">
     <a href="#" class="active">Home</a>
-    <a href="#">About me</a>
+    <a href="#about">About me</a>
     <a href="#">Projects</a>
   </nav>
 
-  <!-- Hoofdinhoud -->
+  <!-- Hero / Home sectie -->
   <div class="wrap">
     <div class="stack">
       <div class="sheet s1"></div>
@@ -40,10 +39,35 @@
           I like building clean, user-friendly web applications that not only
           work well but also look good.
         </p>
-        <a href="#" class="more">Learn more about me &gt;</a>
+        <a href="#about" class="more">Learn more about me &gt;</a>
       </div>
     </div>
   </div>
+
+  <!-- Template voor de About-me inhoud -->
+  <template id="about-template">
+    <div class="sheet-content">
+      <button class="sheet-close" aria-label="Close">✕</button>
+      <h2>About Joëlle de Vlam</h2>
+      <div class="sheet-grid">
+        <div class="sheet-text">
+          <p>
+            Hi and welcome to my portfolio.
+            I enjoy designing, but my main focus is on frontend development.
+            I love bringing ideas to life by building clean, user-friendly web applications that work seamlessly and look visually appealing.
+          </p>
+          <p>
+            I’m motivated by the challenge of creating digital experiences that feel intuitive and engaging for users.
+            Whether it’s translating a concept into a functional interface or polishing the final details,
+            I enjoy projects that combine creativity with technical problem-solving.
+          </p>
+        </div>
+        <figure class="sheet-photo">
+          <div class="photo-placeholder">Picture of me</div>
+        </figure>
+      </div>
+    </div>
+  </template>
 
   <!-- Swipe tekst -->
   <div class="swipe">
